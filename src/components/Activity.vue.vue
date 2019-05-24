@@ -22,7 +22,7 @@
                         label="Date">
                     <template slot-scope="scope">
                         <i class="el-icon-time"></i>
-                        <span style="margin-left: 10px">{{getDate(scope.row.time)}}</span>
+                        <span style="margin-left: 10px">{{getDate(scope.row.date)}}</span>
                     </template>
                 </el-table-column>
 
@@ -76,13 +76,12 @@
                 </el-col>
 
                 <el-col :span="3">
-                    Date:
+                    Time:
                 </el-col>
 
                 <el-col :span="8">
                     <el-time-picker
-                            v-model="value2"
-                            type="time"
+                            v-model="date"
                             placeholder="Pick a day">
                     </el-time-picker>
                     <!--
@@ -90,8 +89,7 @@
                               v-model="time" size="mini">
                     </el-input>-->
                 </el-col>
-
-
+                
 
             </el-row>
 
@@ -112,7 +110,7 @@
             return {
                 activity: '',
                 wrong: false,
-                time: '',
+                date: '',
                 errorMessage: ''
             }
         },
@@ -142,12 +140,12 @@
                     const activity = {
                         name: this.activity,
                         completed: false,
-                        time: this.time
+                        date: this.date
                     };
 
                     this.addActivity({activity});
                     this.activity = '';
-                    this.time = '';
+                    this.date = '';
                     this.wrong = false;
 
                 } else {
@@ -173,7 +171,7 @@
                 return '';
             },
             validateData() {
-                if (this.activity !== '' && this.time !== '') {
+                if (this.activity !== '' && this.date !== '') {
                     return true;
                 } else {
                     return false;
@@ -181,7 +179,7 @@
             },
 
             setMessageError() {
-                if (this.activity === '' && this.time === '') {
+                if (this.activity === '' && this.date === '') {
                     this.errorMessage = 'The activity && the time are empty';
                 } else {
                     if (this.activity === '') {
@@ -194,7 +192,7 @@
             },
 
             getDate (item) {
-               value2: new Date(2016, 9, 10, 18, 40),
+               return moment(item).format('LTS')
             }
 
         }
@@ -226,13 +224,7 @@
         color: #FF0000; 
         text-align: center
     }
-    .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-  }
+   
   .el-col {
     border-radius: 4px;
   }

@@ -3,7 +3,6 @@ import App from './App.vue'
 import store from './store'
 
 Vue.config.productionTip = false
-
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/en'
 Vue.use(ElementUI, { locale });
