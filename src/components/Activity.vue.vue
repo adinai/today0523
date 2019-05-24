@@ -15,14 +15,14 @@
                     :data="activities"
                     :row-class-name="tableRowColor">
                 <el-table-column
-                        prop="name"
-                        label="Name">
+                        prop="task"
+                        label="Task">
                 </el-table-column>
                 <el-table-column
-                        label="Date">
+                        label="Time">
                     <template slot-scope="scope">
-                        <i class="el-icon-time"></i>
-                        <span style="margin-left: 10px">{{getDate(scope.row.date)}}</span>
+                        
+                        <span style="margin-left: 0px">{{getDate(scope.row.date)}}</span>
                     </template>
                 </el-table-column>
 
@@ -66,7 +66,7 @@
         <div>
             <el-row>
                 <el-col :span="3">
-                    Activity:
+                    Task:
                 </el-col>
 
                 <el-col :span="8">
@@ -82,7 +82,7 @@
                 <el-col :span="8">
                     <el-time-picker
                             v-model="date"
-                            placeholder="Pick a day">
+                            placeholder="Pick a time">
                     </el-time-picker>
                     <!--
                     <el-input placeholder="Please input the time: dd/mm/yyyy"
@@ -138,7 +138,7 @@
             addActivityMethod() {
                 if (this.validateData() === true) {
                     const activity = {
-                        name: this.activity,
+                        task: this.activity,
                         completed: false,
                         date: this.date
                     };
@@ -224,12 +224,10 @@
         color: #FF0000; 
         text-align: center
     }
-   
-  .el-col {
-    border-radius: 4px;
-  }
+ 
   .el-button{
       margin-bottom: 100px;
+      margin-top:40px;
       background: green;
       color: white;
   }
