@@ -22,7 +22,7 @@
                         label="Time">
                     <template slot-scope="scope">
                         
-                        <span style="margin-left: 0px">{{getDate(scope.row.date)}}</span>
+                        <span>{{getDate(scope.row.date)}}</span>
                     </template>
                 </el-table-column>
 
@@ -36,23 +36,7 @@
                 </el-table-column>
             </el-table>
         </div>
-        <div>
-            <el-row type="flex" justify="center" class="counterSection">
-                <el-col :span="4">
-                    Completed :
-                </el-col>
-                <el-col :span="2">
-                    {{completed}}
-                </el-col>
-                <el-col :span="3">
-                    Total :
-                </el-col>
-                <el-col :span="2">
-                    {{total}}
-                </el-col>
-            </el-row>
-        </div>
-
+        
         <div v-if="isWrongActivity" class="wrongNotification">
             <el-alert
                     :title="errorMessage"
@@ -69,7 +53,7 @@
                     Task:
                 </el-col>
 
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-input placeholder="Please input the activity"
                               v-model="activity" size="mini">
                     </el-input>
@@ -79,7 +63,7 @@
                     Time:
                 </el-col>
 
-                <el-col :span="8">
+                <el-col :span="5">
                     <el-time-picker
                             v-model="date"
                             placeholder="Pick a time">
@@ -97,6 +81,24 @@
                        @click="addActivityMethod()"> Add</el-button>
 
         </div>
+
+        <div>
+            <el-row type="flex" justify="center" class="counterSection">
+                <el-col :span="3">
+                    Completed :
+                </el-col>
+                <el-col :span="1">
+                    {{completed}}
+                </el-col>
+                <el-col :span="2">
+                    Total :
+                </el-col>
+                <el-col :span="1">
+                    {{total}}
+                </el-col>
+            </el-row>
+        </div>
+
 
     </div>
 </template>
@@ -121,6 +123,7 @@
             isWrongActivity() {
                 return this.wrong
             },
+      
             completed() {
                 return this.activities.filter((val) => val.completed === true).length;
             },
@@ -193,7 +196,16 @@
 
             getDate (item) {
                return moment(item).format('LTS')
+            },
+
+            alarmPlay() {
+                if(this.date === moment().format('LTS')){
+                  this.errorMessage = "Alarm"  
+                }
             }
+
+            
+            
 
         }
     }
@@ -204,10 +216,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
   }
     .main {
         text-align: center;
-         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+         background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
     }
     h1{
         margin-top: 50px;
@@ -242,10 +256,12 @@
     }
 
     .el-table .warning-row {
+        margin-bottom: 30px;
         background: oldlace;
     }
 
     .el-table .success-row {
-        background: #f0f9eb;
+        background: #91bd79;
+
     }
 </style>
