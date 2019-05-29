@@ -1,19 +1,12 @@
 <template>
   <div id="app">
-    <Activity/>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import Activity from './components/Activity.vue'
-
-export default {
-  name: 'app',
-  components: {
-    Activity
-  }
-}
-</script>
 
 <style>
 #app {
